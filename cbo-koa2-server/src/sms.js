@@ -124,9 +124,15 @@ const codes = {
 }
 
 function sendSms(phone) {
-    const code = Math.floor(Math.random() * 1000);
-    codes[phone] = `3${code}`;
-    var msg=`您的登录验证码为: 3${code}, 请注意保密, 十五分钟内有效。`;
+    // const code = Math.floor(Math.random() * 1000);
+    let out = 0;
+    do
+        out = Math.floor(Math.random()*10000);
+    while( out < 1000 )
+
+
+    codes[phone] = `${out}`;
+    var msg=`您的登录验证码为: ${out}, 请注意保密, 十五分钟内有效。`;
     console.log( phone, msg);
     send_sms(send_sms_uri,account,password,phone,msg);
 }
