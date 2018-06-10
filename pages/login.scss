@@ -1,0 +1,94 @@
+@import '../styles';
+
+$place-color: #ffffff;
+
+.login-page {
+  font-size: .266rem;
+
+  input::-webkit-input-placeholder{
+    color: $place-color;
+  }
+  input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+    color: $place-color;
+  }
+  input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+    color: $place-color;
+  }
+  input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
+    color: $place-color;
+  }
+
+  .log {
+    background-image: url("../static/logobus.png");
+    width: 2.37rem;
+    height: 2.02rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 2.2rem auto .5rem;
+  }
+
+  .btn {
+    background-color: #ffb86f;
+    height: .55rem;
+    width: 4.4rem;
+    border-radius: .1rem;
+    margin: 0 auto;
+    display: block;
+    padding-left: .45rem;
+
+    &.mobile {
+      margin-top: .2rem;
+    }
+
+    &.getyanzhengma {
+      width: 1.61rem;
+      padding-left: 0;
+      display: inline-block;
+      float: right;
+      color: $place-color;
+    }
+  }
+
+  .yanzhengma {
+    height: .55rem;
+    width: 4.4rem;
+    margin: .2rem auto 0;
+
+    .input-yanzhengma {
+      width: 2.55rem;
+      height: .55rem;
+      border-color: #a4a4a4;
+      border-style: solid;
+      border-width: .02rem;
+      border-radius: .1rem;
+      padding-left: .45rem;
+    }
+
+    input::-webkit-input-placeholder{
+      color: #d1d1d1;
+    }
+    input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+      color: #d1d1d1;
+    }
+    input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+      color: #d1d1d1;
+    }
+    input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
+      color: #d1d1d1;
+    }
+  }
+
+  .login-btn {
+    height: .55rem;
+    width: 4.4rem;
+    margin: .45rem auto 0;
+    background-color: #ff8201;
+    display: block;
+    border-radius: .1rem;
+    color: $place-color;
+  }
+
+
+
+}

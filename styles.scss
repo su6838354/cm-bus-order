@@ -1,0 +1,74 @@
+/* 设计稿750
+
+  设计稿上 20px;
+
+ */
+
+$base: 7; //3.75;
+
+html {
+  @media only screen and (max-width: 480px) {
+    font-size: 480px/$base;
+  }
+  @media only screen and (max-width: 414px) {
+    font-size: 414px/$base;
+  }
+  @media only screen and (max-width: 412px) {
+    font-size: 412px/$base;
+  }
+  @media only screen and (max-width: 400px) {
+    font-size: 400px/$base;
+  }
+  @media only screen and (max-width: 393px) {
+    font-size: 393px/$base;
+  }
+  @media only screen and (max-width: 375px) {
+    font-size: 100px;
+  }
+  @media only screen and (max-width: 360px) {
+    font-size: 360px/$base;
+  }
+  @media only screen and (max-width: 345px) {
+    font-size: 345px/$base;
+  }
+  @media only screen and (max-width: 320px) {
+    font-size: 320px/$base;
+  }
+}
+
+html {
+  -webkit-text-size-adjust: none;
+  font-size: calc(100vw / 7);
+  @media only screen and (min-width: 640px) {
+    font-size: 640px/$base;
+  }
+}
+
+
+* {
+  box-sizing: border-box;
+  border: 0;
+  -webkit-tap-highlight-color: transparent;
+  outline: 0;
+  margin: 0;
+  padding: 0;
+  font-size: .26rem;
+  font-weight: 100;
+}
+
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td {
+  vertical-align: baseline;
+  border: 0 none;
+  list-style: outside none none;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  max-width: 640px;
+  background: #f4f4f4;
+  color: #666666;
+  font-size: 12px;
+  line-height: 1.5;
+}

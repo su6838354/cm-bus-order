@@ -1,0 +1,34 @@
+@import '../styles';
+
+
+.main-page {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+
+  background-image: url('../static/main-bk.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .btn {
+    width: 4.4rem;
+    height: .60rem;
+    display: block;
+    margin: .75rem auto;
+    background-color: #f89202;
+    color: #ffffff;
+    border-radius: .13rem;
+    letter-spacing: .04rem;
+
+    &:first-child {
+      margin-top: 3rem;
+    }
+
+    &.login {
+      letter-spacing: .6rem;
+      text-indent: .6rem;
+    }
+
+  }
+}
