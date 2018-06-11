@@ -2,7 +2,7 @@
   "apps": [{
     "name": "cm-bux-order",
     "script": "node_modules/next/dist/bin/next",
-    "args": ["start --port 3009"],
+//    "args": "start -p 3010",
     // "cwd": "/absolute/path/to/project",
     "exec_mode": "cluster",
     "instances": 1,
