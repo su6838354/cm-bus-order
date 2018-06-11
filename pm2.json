@@ -1,10 +1,11 @@
 {
   "apps": [{
     "name": "cm-bux-order",
-    "script": "npm start",
+    "script": "node_modules/next/dist/bin/next",
+    "args": ["start --port 3009"],
     // "cwd": "/absolute/path/to/project",
     "exec_mode": "cluster",
-    "instances": 0,
+    "instances": 1,
     "max_memory_restart": "1G",
     "autorestart": true,
     "node_args": [],

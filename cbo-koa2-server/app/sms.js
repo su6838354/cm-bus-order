@@ -124,9 +124,15 @@ var codes = {};
 
 
 function sendSms(phone) {
-    var code = Math.floor(Math.random() * 1000);
-    codes[phone] = '3' + code;
-    var msg = '\u60A8\u7684\u767B\u5F55\u9A8C\u8BC1\u7801\u4E3A: 3' + code + ', \u8BF7\u6CE8\u610F\u4FDD\u5BC6, \u5341\u4E94\u5206\u949F\u5185\u6709\u6548\u3002';
+    // const code = Math.floor(Math.random() * 1000);
+    var out = 0;
+    do {
+        out = Math.floor(Math.random() * 10000);} while (
+    out < 1000);
+
+
+    codes[phone] = '' + out;
+    var msg = '\u60A8\u7684\u767B\u5F55\u9A8C\u8BC1\u7801\u4E3A: ' + out + ', \u8BF7\u6CE8\u610F\u4FDD\u5BC6, \u5341\u4E94\u5206\u949F\u5185\u6709\u6548\u3002';
     console.log(phone, msg);
     send_sms(send_sms_uri, account, password, phone, msg);
 }
