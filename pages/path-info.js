@@ -10,11 +10,18 @@ export default class PathInfo extends React.Component {
         super(props);
     }
 
+    componentDidMount () {
+        window.document.title = '旅游巴士公告线路'
+    }
+
     render () {
-        <div>
-            旅游线路1 上行
-            旅游线路1 下行
-        </div>
+        return (
+            <div>
+                <div className="path-image">
+
+                </div>
+            </div>
+        )
     }
 }
 

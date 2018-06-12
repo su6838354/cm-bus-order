@@ -34,6 +34,10 @@ export default class Main extends React.Component {
         }
     }
 
+    componentDidMount () {
+        window.document.title = '主页'
+    }
+
     render () {
         const { mobile, username } = this.props;
         return (
@@ -51,7 +55,7 @@ export default class Main extends React.Component {
                 {
                     mobile ?
                         <button className="btn" onClick={() => {
-                            Router.push('/person');
+                            Router.push('/login');
                         }}>个人中心</button>
                         :
                         <button className="btn login" onClick={() => {

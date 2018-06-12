@@ -29,12 +29,10 @@ export default class OrderHistory extends React.Component {
                 })
                 res.end()
                 res.finished = true
-                return
             }
         } else {
             if (!mobile) {
                 Router.push('/login');
-                return
             }
         }
 
@@ -62,7 +60,7 @@ export default class OrderHistory extends React.Component {
         return this.state.list.map(item => {
             return (
                 <div>
-                    <OrderInfo {...item} order_owner={username} order_mobile={mobile}  />
+                    <OrderInfo {...item}  order_mobile={mobile}  />
                 </div>
             )
         })

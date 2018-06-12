@@ -11,7 +11,12 @@ import Router from 'next/router';
 import data  from '../data';
 const { orderData } = data;
 import OrderInfo from './components/order-info';
+import moment from 'moment';
 
+function getCookie(name) {
+    var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
+    if (arr != null) return unescape(arr[2]); return null;
+};
 
 export default class Order extends React.Component {
     constructor (props) {
@@ -39,8 +44,11 @@ export default class Order extends React.Component {
     }
 
     static async getInitialProps (ctx) {
-        const { mobile, username } = cookies(ctx);
-        console.log('mobile:', mobile);
+        let { mobile, username } = cookies(ctx);
+        username = unescape(username);
+        if (mobile && username == "undefined") {
+            username = getCookie('username');
+        }
         const { res } = ctx;
         if (res) {
             if (!mobile) {
@@ -55,6 +63,7 @@ export default class Order extends React.Component {
                 Router.push('/login');
             }
         }
+        console.log(mobile, username)
         return {
             mobile, username
         }
@@ -103,7 +112,6 @@ export default class Order extends React.Component {
         }
         const { username: order_owner, mobile: order_mobile } = this.props;
         request.post('/cbo/addOrder', {...this.state.orderInfo, order_owner, order_mobile, order_schedules_id: 0, status: 'new' }).then(response => {
-            console.log(response);
             if (response.data.code === 0) {
                 this.setState({ status: 1 });
             }
@@ -162,14 +170,45 @@ export default class Order extends React.Component {
 
         } = this.state.orderInfo;
 
+
+
+        let dateOptions = null;
+        if (moment().hour() > 6) {
+            const tom2 = moment().add(2, 'd').format('YYYY-MM-DD');
+            const tomorrow = moment().add(1, 'd').format('YYYY-MM-DD');
+            dateOptions = (
+                <select value={order_date} onChange={(e) => {
+                    this.setState({ orderInfo: {...this.state.orderInfo, order_date: e.target.value }});
+                }}>
+                    <option key={'null'} value={''}>{'请选择'}</option>
+                    <option key={tomorrow} value={tomorrow}>{`${tomorrow}  明天`}</option>
+                    <option key={tom2} value={tom2}>{`${tom2}  后天`}</option>
+                </select>
+            );
+        } else {
+            const today = moment().format('YYYY-MM-DD');
+            const tomorrow = moment().add(1, 'd').format('YYYY-MM-DD');
+            dateOptions = (
+                <select value={order_date} onChange={(e) => {
+                    this.setState({ orderInfo: {...this.state.orderInfo, order_date: e.target.value }});
+                }}>
+                    <option key={'null'} value={''}>{'请选择'}</option>
+                    <option key={today} value={today}>{`${today}  今天`}</option>
+                    <option key={tomorrow} value={tomorrow}>{`${tomorrow}  明天`}</option>
+                </select>
+            );
+        }
+
+
         return (
             <div className="order-page">
                 <div className="form-content">
                     <div className="item">
                         <span>选择日期</span>
-                        <input type='date' value={order_date} onChange={(e) => {
-                            this.setState({ orderInfo: {...this.state.orderInfo, order_date: e.target.value }});
-                        }} />
+                        {dateOptions}
+                        {/*<input type='date' value={order_date} onChange={(e) => {*/}
+                            {/*this.setState({ orderInfo: {...this.state.orderInfo, order_date: e.target.value }});*/}
+                        {/*}} />*/}
                     </div>
 
                     <div className="item">
