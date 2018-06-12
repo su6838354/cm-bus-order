@@ -7,7 +7,7 @@ import './order-history.scss';
 import OrderInfo from './components/order-info';
 import cookies from 'next-cookies';
 import request from './request';
-
+import Router from 'next/router';
 
 export default class OrderHistory extends React.Component {
 

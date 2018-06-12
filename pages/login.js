@@ -75,7 +75,7 @@ export default class Login extends React.Component {
                 .then((response) => {
                     console.log(response);
                     if (response.data.code === 0) {
-                        let i = 10;
+                        let i = 60;
                         const start = () => {
                             if (i === 0) {
                                 return;
