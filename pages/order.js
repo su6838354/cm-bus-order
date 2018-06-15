@@ -173,21 +173,25 @@ export default class Order extends React.Component {
 
 
         let dateOptions = null;
+
+        const tom4 = moment().add(4, 'd').format('YYYY-MM-DD');
+        const tom3 = moment().add(3, 'd').format('YYYY-MM-DD');
+        const tom2 = moment().add(2, 'd').format('YYYY-MM-DD');
+        const tomorrow = moment().add(1, 'd').format('YYYY-MM-DD');
+        const today = moment().format('YYYY-MM-DD');
         if (moment().hour() > 6) {
-            const tom2 = moment().add(2, 'd').format('YYYY-MM-DD');
-            const tomorrow = moment().add(1, 'd').format('YYYY-MM-DD');
             dateOptions = (
                 <select value={order_date} onChange={(e) => {
                     this.setState({ orderInfo: {...this.state.orderInfo, order_date: e.target.value }});
                 }}>
                     <option key={'null'} value={''}>{'请选择'}</option>
                     <option key={tomorrow} value={tomorrow}>{`${tomorrow}  明天`}</option>
-                    <option key={tom2} value={tom2}>{`${tom2}  后天`}</option>
+                    <option key={tom2} value={tom2}>{`${tom2} 后天`}</option>
+                    <option key={tom3} value={tom3}>{`${tom3}`}</option>
+                    <option key={tom4} value={tom4}>{`${tom4}`}</option>
                 </select>
             );
         } else {
-            const today = moment().format('YYYY-MM-DD');
-            const tomorrow = moment().add(1, 'd').format('YYYY-MM-DD');
             dateOptions = (
                 <select value={order_date} onChange={(e) => {
                     this.setState({ orderInfo: {...this.state.orderInfo, order_date: e.target.value }});
@@ -195,6 +199,8 @@ export default class Order extends React.Component {
                     <option key={'null'} value={''}>{'请选择'}</option>
                     <option key={today} value={today}>{`${today}  今天`}</option>
                     <option key={tomorrow} value={tomorrow}>{`${tomorrow}  明天`}</option>
+                    <option key={tom2} value={tom2}>{`${tom2} 后天`}</option>
+                    <option key={tom3} value={tom3}>{`${tom3}`}</option>
                 </select>
             );
         }
