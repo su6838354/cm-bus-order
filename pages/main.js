@@ -43,25 +43,27 @@ export default class Main extends React.Component {
         return (
             <div className="main-page">
 
-                <button className="btn" onClick={() => {
-                    Router.push('/order')
-                }}>在线预订</button>
-                <button className="btn" onClick={() => {
-                    Router.push('/order-history')
-                }}>预订查询</button>
-                <button className="btn" onClick={() => {
-                    Router.push('/path-info')
-                }}>公交线路</button>
-                {
-                    mobile ?
-                        <button className="btn" onClick={() => {
-                            Router.push('/login');
-                        }}>个人中心</button>
-                        :
-                        <button className="btn login" onClick={() => {
-                            Router.push('/login');
-                        }}>登录</button>
-                }
+                <div className="main-center">
+                    <button className="btn" onClick={() => {
+                        Router.push('/order')
+                    }}>在线预订</button>
+                    <button className="btn" onClick={() => {
+                        Router.push('/order-history')
+                    }}>预订查询</button>
+                    <button className="btn" onClick={() => {
+                        Router.push('/path-info')
+                    }}>公交线路</button>
+                    {
+                        mobile ?
+                            <button className="btn" onClick={() => {
+                                Router.push('/login');
+                            }}>个人中心</button>
+                            :
+                            <button className="btn login" onClick={() => {
+                                Router.push('/login');
+                            }}>登录</button>
+                    }
+                </div>
             </div>
         )
     }
