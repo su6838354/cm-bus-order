@@ -12,7 +12,7 @@ var _sms = require('../sms');var _sms2 = _interopRequireDefault(_sms);function _
                                                                                                                                                                      * @param {*} ctx
                                                                                                                                                                      * @param {*} next
                                                                                                                                                                      */
-var addOrder = function () {var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(ctx, next) {var params, order_date, order_path, order_station, order_class, order_ticket_count, order_owner, order_mobile, order_schedules_id, status, create_time, sql, res;return _regenerator2.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+var addOrder = function () {var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(ctx, next) {var params, order_date, order_path, order_station, order_class, order_ticket_count, order_owner, order_mobile, order_schedules_id, status, count, create_time, sql, res;return _regenerator2.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
                         params = ctx.request.body;
 
                         order_date =
@@ -24,16 +24,21 @@ var addOrder = function () {var _ref = (0, _asyncToGenerator3.default)( /*#__PUR
 
 
 
-                        params.order_date, order_path = params.order_path, order_station = params.order_station, order_class = params.order_class, order_ticket_count = params.order_ticket_count, order_owner = params.order_owner, order_mobile = params.order_mobile, order_schedules_id = params.order_schedules_id, status = params.status;
+                        params.order_date, order_path = params.order_path, order_station = params.order_station, order_class = params.order_class, order_ticket_count = params.order_ticket_count, order_owner = params.order_owner, order_mobile = params.order_mobile, order_schedules_id = params.order_schedules_id, status = params.status;_context.next = 4;return (
+                            _query_count(order_date, order_path, order_station, order_class));case 4:count = _context.sent;if (!(
+                        count >= 20)) {_context.next = 9;break;}
+                        ctx.body = { code: 1003, message: '\u62B1\u6B49\uFF0C' + order_date + '\u7684\u7968\u5DF2\u9884\u8BA2\u5B8C!', data: count };_context.next = 16;break;case 9:
+
                         create_time = Date.now() / 1000;
                         sql = 'INSERT INTO cbo_order VALUES (NULL, \'' + order_owner + '\', \'' + order_mobile + '\', \'' + order_date + '\',\n              \'' +
                         order_path + '\', \'' + order_station + '\', \'' + create_time + '\', \'' + order_ticket_count + '\', \'' + order_class + '\', \n              \'' +
                         order_schedules_id + '\', \'' + status + '\')';
-                        console.log('add cbo_order sql:', sql);_context.next = 7;return (
-                            (0, _db_connection.query)(sql));case 7:res = _context.sent;
-                        ctx.body = { code: 0, message: 'success', data: res };case 9:case 'end':return _context.stop();}}}, _callee, undefined);}));return function addOrder(_x, _x2) {return _ref.apply(this, arguments);};}(); /**
-                                                                                                                                                                                                                                  * Created by pdd on 2018/6/10.
-                                                                                                                                                                                                                                  */
+                        console.log('add cbo_order sql:', sql);_context.next = 14;return (
+                            (0, _db_connection.query)(sql));case 14:res = _context.sent;
+                        ctx.body = { code: 0, message: 'success', data: res };case 16:case 'end':return _context.stop();}}}, _callee, undefined);}));return function addOrder(_x, _x2) {return _ref.apply(this, arguments);};}(); /**
+                                                                                                                                                                                                                                   * Created by pdd on 2018/6/10.
+                                                                                                                                                                                                                                   */
+
 var sendCode = function () {var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(ctx, next) {var params, mobile;return _regenerator2.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
                         params = ctx.request.body;
                         mobile = params.mobile;
@@ -119,7 +124,7 @@ var list_search = function () {var _ref4 = (0, _asyncToGenerator3.default)( /*#_
                             }
                         }
 
-                        sql = 'select * from cbo_order as A ' + where_sql + ' limit ' + (pageIndex - 1) * limit + ',' + limit;
+                        sql = 'select * from cbo_order as A ' + where_sql + ' order by create_time desc limit ' + (pageIndex - 1) * limit + ',' + limit;
 
                         console.log('cbo_order list sql:', sql);_context4.next = 15;return (
                             (0, _db_connection.query)(sql));case 15:data = _context4.sent;_context4.next = 18;return (
@@ -134,7 +139,28 @@ var list_by_mobile = function () {var _ref5 = (0, _asyncToGenerator3.default)( /
                         mobile = params.mobile;
                         sql = 'select * from cbo_order where order_mobile="' + mobile + '" order by create_time desc';_context5.next = 5;return (
                             (0, _db_connection.query)(sql));case 5:res = _context5.sent;
-                        ctx.body = { code: 0, message: 'success', data: res };case 7:case 'end':return _context5.stop();}}}, _callee5, undefined);}));return function list_by_mobile(_x9, _x10) {return _ref5.apply(this, arguments);};}();exports.default =
+                        ctx.body = { code: 0, message: 'success', data: res };case 7:case 'end':return _context5.stop();}}}, _callee5, undefined);}));return function list_by_mobile(_x9, _x10) {return _ref5.apply(this, arguments);};}();
+
+
+var _query_count = function () {var _ref6 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee6(order_date, order_path, order_station, order_class) {var sql, res, count;return _regenerator2.default.wrap(function _callee6$(_context6) {while (1) {switch (_context6.prev = _context6.next) {case 0:
+                        sql = 'select * from cbo_order where \n    order_date="' +
+                        order_date + '" and \n    order_path="' +
+                        order_path + '" and \n    order_station="' +
+                        order_station + '" and \n    order_class="' +
+                        order_class + '"';_context6.next = 3;return (
+                            (0, _db_connection.query)(sql));case 3:res = _context6.sent;
+                        count = 0;
+                        res.map(function (item) {
+                            count = count + item.order_ticket_count;
+                        });return _context6.abrupt('return',
+                        count);case 7:case 'end':return _context6.stop();}}}, _callee6, undefined);}));return function _query_count(_x11, _x12, _x13, _x14) {return _ref6.apply(this, arguments);};}();
+
+
+var query_count = function () {var _ref7 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee7(ctx, next) {var params, order_date, order_path, order_station, order_class, count;return _regenerator2.default.wrap(function _callee7$(_context7) {while (1) {switch (_context7.prev = _context7.next) {case 0:
+                        params = ctx.request.body;
+                        order_date = params.order_date, order_path = params.order_path, order_station = params.order_station, order_class = params.order_class;
+                        count = _query_count(order_date, order_path, order_station, order_class);
+                        ctx.body = { code: 0, message: 'success', data: count };case 4:case 'end':return _context7.stop();}}}, _callee7, undefined);}));return function query_count(_x15, _x16) {return _ref7.apply(this, arguments);};}();exports.default =
 
 
 {
@@ -142,5 +168,6 @@ var list_by_mobile = function () {var _ref5 = (0, _asyncToGenerator3.default)( /
     sendCode: sendCode,
     login: login,
     list_search: list_search,
-    list_by_mobile: list_by_mobile };module.exports = exports['default'];
+    list_by_mobile: list_by_mobile,
+    query_count: query_count };module.exports = exports['default'];
 //# sourceMappingURL=cboCtrl.js.map

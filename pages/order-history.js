@@ -59,7 +59,7 @@ export default class OrderHistory extends React.Component {
         const { username, mobile } = this.props;
         return this.state.list.map(item => {
             return (
-                <div>
+                <div key={item.id}>
                     <OrderInfo {...item}  order_mobile={mobile}  />
                 </div>
             )

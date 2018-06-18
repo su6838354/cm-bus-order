@@ -25,13 +25,18 @@ const addOrder = async(ctx, next) => {
         order_schedules_id,
         status
     } = params;
-    const create_time = Date.now()/1000;
-    const sql = `INSERT INTO cbo_order VALUES (NULL, '${order_owner}', '${order_mobile}', '${order_date}',
+    const count = await _query_count(order_date, order_path, order_station, order_class);
+    if (count >= 20) {
+        ctx.body = {code: 1003, message: `抱歉，${order_date}的票已预订完!`, data: count}
+    } else {
+        const create_time = Date.now()/1000;
+        const sql = `INSERT INTO cbo_order VALUES (NULL, '${order_owner}', '${order_mobile}', '${order_date}',
               '${order_path}', '${order_station}', '${create_time}', '${order_ticket_count}', '${order_class}', 
               '${order_schedules_id}', '${status}')`;
-    console.log('add cbo_order sql:', sql);
-    const res = await query(sql);
-    ctx.body = {code: 0, message: 'success', data: res}
+        console.log('add cbo_order sql:', sql);
+        const res = await query(sql);
+        ctx.body = {code: 0, message: 'success', data: res}
+    }
 }
 
 const sendCode = async(ctx, next) => {
@@ -119,7 +124,7 @@ const list_search = async (ctx, next) => {
         }
     }
 
-    const sql = `select * from cbo_order as A ${where_sql} limit ${(pageIndex - 1) * limit},${limit}`
+    const sql = `select * from cbo_order as A ${where_sql} order by create_time desc limit ${(pageIndex - 1) * limit},${limit}`
 
     console.log('cbo_order list sql:', sql)
     let data = await query(sql)
@@ -137,10 +142,32 @@ const list_by_mobile = async (ctx, next) => {
     ctx.body = {code: 0, message: 'success', data: res}
 }
 
+const _query_count = async(order_date, order_path, order_station, order_class) => {
+    const sql = `select * from cbo_order where 
+    order_date="${order_date}" and 
+    order_path="${order_path}" and 
+    order_station="${order_station}" and 
+    order_class="${order_class}"`;
+    const res = await query(sql);
+    let count = 0;
+    res.map(item => {
+        count = count + item.order_ticket_count;
+    })
+    return count;
+}
+
+const query_count = async(ctx, next) => {
+    const params = ctx.request.body
+    const { order_date, order_path, order_station, order_class } = params;
+    const count = _query_count(order_date, order_path, order_station, order_class);
+    ctx.body = {code: 0, message: 'success', data: count}
+}
+
 export default {
     addOrder,
     sendCode,
     login,
     list_search,
     list_by_mobile,
+    query_count,
 }

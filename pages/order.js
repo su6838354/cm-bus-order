@@ -70,7 +70,10 @@ export default class Order extends React.Component {
     }
 
     componentDidMount () {
-        window.document.title = "旅游巴士在线预订"
+        window.document.title = "旅游巴士在线预订";
+
+
+
     }
 
     renderSuccess = () => {
@@ -114,6 +117,8 @@ export default class Order extends React.Component {
         request.post('/cbo/addOrder', {...this.state.orderInfo, order_owner, order_mobile, order_schedules_id: 0, status: 'new' }).then(response => {
             if (response.data.code === 0) {
                 this.setState({ status: 1 });
+            } else {
+                alert(response.data.message);
             }
         }).catch(error => {
 
