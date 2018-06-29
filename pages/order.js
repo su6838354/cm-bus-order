@@ -102,6 +102,9 @@ export default class Order extends React.Component {
                     {/*<div>预订人：{order_owner}</div>*/}
                     {/*<div>手机号：{order_mobile}</div>*/}
                 {/*</div>*/}
+                <div className="success-go-btn" onClick={() => {
+                    window.open('http://quyou.weichongming.com/#/trip');
+                }}></div>
             </div>
         )
     }

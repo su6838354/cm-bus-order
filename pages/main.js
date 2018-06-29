@@ -63,6 +63,10 @@ export default class Main extends React.Component {
                                 Router.push('/login');
                             }}>登录</button>
                     }
+                    <button className="btn" onClick={() => {
+                        // window.location.href = '';
+                        window.open('http://quyou.weichongming.com/#/trip');
+                    }}>进入趣游崇明</button>
                 </div>
             </div>
         )
