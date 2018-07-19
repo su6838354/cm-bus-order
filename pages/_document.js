@@ -16,6 +16,15 @@ export default class MyDocument extends Document {
             <body>
                 <Main />
                 <NextScript />
+                <script  dangerouslySetInnerHTML={{__html: `
+                var _hmt = _hmt || [];
+                    (function() {
+                    var hm = document.createElement("script");
+                    hm.src = "https://hm.baidu.com/hm.js?7cfddc1838de22cfb6fd6515c2c32375";
+                    var s = document.getElementsByTagName("script")[0];
+                    s.parentNode.insertBefore(hm, s);
+                })();
+                ` }}/>
             </body>
             </html>
         )
