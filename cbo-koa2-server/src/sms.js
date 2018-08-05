@@ -132,7 +132,7 @@ function sendSms(phone) {
 
 
     codes[phone] = `${out}`;
-    var msg=`您的登录验证码为: ${out}, 请注意保密, 十五分钟内有效。`;
+    var msg=`【趣游崇明】您的登录验证码为: ${out}, 请注意保密, 十五分钟内有效。`;
     console.log( phone, msg);
     send_sms(send_sms_uri,account,password,phone,msg);
 }
